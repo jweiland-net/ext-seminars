@@ -4,6 +4,7 @@ namespace OliverKlee\Seminars\BackEnd;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Backend\Template\DocumentTemplate;
+use TYPO3\CMS\Backend\Template\ModuleTemplate;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\FormProtection\FormProtectionFactory;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
@@ -52,20 +53,23 @@ class Controller extends AbstractModule
         $languageService = $this->getLanguageService();
         $backEndUser = $this->getBackendUser();
 
-        /** @var DocumentTemplate $document */
-        $document = GeneralUtility::makeInstance(DocumentTemplate::class);
+        /** @var DocumentTemplate $documentTemplate */
+        $documentTemplate = GeneralUtility::makeInstance(DocumentTemplate::class);
+        $documentTemplate->bodyTagId = '';
+        $documentTemplate->divClass = 'module';
+
+        $moduleTemplate = GeneralUtility::makeInstance(ModuleTemplate::class);
+        $moduleTemplate->setTitle($languageService->getLL('title'));
 
         $pageRenderer = $this->getPageRenderer();
-        $pageRenderer->addCssFile(
-            '../typo3conf/ext/seminars/Resources/Public/CSS/BackEnd/BackEnd.css',
-            'stylesheet',
-            'all',
-            '',
-            false
-        );
+        $pageRenderer->disableCompressCss();
+        $pageRenderer->disableCompressJavascript();
+        $pageRenderer->disableConcatenateFiles();
 
-        $content = $document->startPage($languageService->getLL('title')) .
-            '<h1>' . $languageService->getLL('title') . '</h1></div>';
+//        $content = $documentTemplate->startPage($languageService->getLL('title'));
+
+        $content = '';
+        $content .=  '<h1>' . $languageService->getLL('title') . '</h1>';
 
         if ($this->id <= 0) {
             /** @var FlashMessage $message */
@@ -77,12 +81,12 @@ class Controller extends AbstractModule
             );
             $this->addFlashMessage($message);
 
-            return $content . $this->getRenderedFlashMessages() . $document->endPage();
+            return $content . $this->getRenderedFlashMessages() . $documentTemplate->endPage();
         }
 
         $pageAccess = BackendUtility::readPageAccess($this->id, $this->perms_clause);
         if (!is_array($pageAccess) && !$backEndUser->isAdmin()) {
-            return $content . $this->getRenderedFlashMessages() . $document->endPage();
+            return $content . $this->getRenderedFlashMessages() . $documentTemplate->endPage();
         }
 
         if (!$this->hasStaticTemplate()) {
@@ -95,7 +99,7 @@ class Controller extends AbstractModule
             );
             $this->addFlashMessage($message);
 
-            return $content . $this->getRenderedFlashMessages() . $document->endPage();
+            return $content . $this->getRenderedFlashMessages() . $documentTemplate->endPage();
         }
 
         $this->setPageData($pageAccess);
@@ -130,11 +134,16 @@ class Controller extends AbstractModule
         // rights to show any of the tabs.
         if ($this->subModule > 0) {
             $moduleToken = FormProtectionFactory::get()->generateToken('moduleCall', self::MODULE_NAME);
-            $content .= $document->getTabMenu(
-                ['M' => self::MODULE_NAME, 'moduleToken' => $moduleToken, 'id' => $this->id],
-                'subModule',
-                $this->subModule,
-                $this->availableSubModules
+//            $content .= $documentTemplate->getTabMenu(
+//                ['M' => self::MODULE_NAME, 'moduleToken' => $moduleToken, 'id' => $this->id],
+//                'subModule',
+//                $this->subModule,
+//                $this->availableSubModules
+//            );
+            $content .= $moduleTemplate->getDynamicTabMenu(
+                $this->availableSubModules,
+                'tx_seminars',
+                $this->subModule
             );
         }
 
@@ -170,7 +179,10 @@ class Controller extends AbstractModule
             default:
         }
 
-        return $content . $document->endPage();
+        $moduleTemplate->setContent($content);
+        return $moduleTemplate->renderContent();
+
+        return $content . $documentTemplate->endPage();
     }
 
     /**
