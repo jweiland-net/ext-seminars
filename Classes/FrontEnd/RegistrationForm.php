@@ -740,7 +740,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
             $pageId = $this->getConfValueInteger('listPID');
         }
 
-        $linkConfiguration = ['parameter' => $pageId];
+        $linkConfiguration = ['parameter' => $pageId, 'useCacheHash' => true];
 
         if ($sendParameters) {
             $linkConfiguration['additionalParams'] = GeneralUtility::implodeArrayForUrl(

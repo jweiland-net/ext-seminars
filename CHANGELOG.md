@@ -17,6 +17,13 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Remove unsupported properties from TCA type "select" (#191)
 
 ### Fixed
+- Always provide a cHash for URLs (#???)
+Still to do:
+1. unify the link configuration for all ->typoLink_URL( calls
+1. unify the link configuration for all ->typoLink( calls
+1. fix all ->typoLink( calls
+1. convert all relevant ->getTypoLink calls to ->typoLink(
+
 - Allow hiding the unregistration notice in the thank-you email (#185)
 - Add more common files to the `.gitignore` (#184)
 

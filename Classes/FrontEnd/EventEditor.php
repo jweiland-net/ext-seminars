@@ -632,29 +632,29 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      */
     public function getEventSuccessfullySavedUrl()
     {
-        $additionalParameters = '';
 
         if ($this->getFormValue('proceed_file_upload')) {
             $additionalParameters = GeneralUtility::implodeArrayForUrl(
                 $this->prefixId,
                 ['seminar' => $this->getObjectUid()]
             );
-            $pageId = $GLOBALS['TSFE']->id;
+            $url = $this->cObj->typoLink_URL(
+                [
+                    'parameter' => $GLOBALS['TSFE']->id,
+                    'additionalParams' => $additionalParameters,
+                    'useCacheHash' => true,
+                ]
+            );
         } else {
-            $pageId = $this->getConfValueInteger(
-                'eventSuccessfullySavedPID',
-                's_fe_editing'
+            $url = $this->cObj->typoLink_URL(
+                [
+                    'parameter' => $this->getConfValueInteger('eventSuccessfullySavedPID', 's_fe_editing'),
+                    'useCacheHash' => true,
+                ]
             );
         }
 
-        return GeneralUtility::locationHeaderUrl(
-            $this->cObj->typoLink_URL(
-                [
-                    'parameter' => $pageId,
-                    'additionalParams' => $additionalParameters,
-                ]
-            )
-        );
+        return GeneralUtility::locationHeaderUrl($url);
     }
 
     /**
@@ -1497,6 +1497,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
                     true
                 ),
                 'type' => \Tx_Seminars_FrontEnd_PublishEvent::PUBLICATION_TYPE_NUMBER,
+                'useCacheHash' => true,
             ]
         );
 

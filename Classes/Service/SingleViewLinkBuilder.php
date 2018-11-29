@@ -4,7 +4,6 @@ use TYPO3\CMS\Core\TimeTracker\NullTimeTracker;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
-use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
 
 /**
  * This class provides functions for creating the link/URL to the single view page of an event.
@@ -16,18 +15,18 @@ class Tx_Seminars_Service_SingleViewLinkBuilder
     /**
      * a plugin instance that provides access to the flexforms plugin settings
      *
-     * @var AbstractPlugin
+     * @var \Tx_Oelib_TemplateHelper
      */
     private $plugin = null;
 
     /**
      * Sets the plugin used accessing to the flexforms plugin settings.
      *
-     * @param AbstractPlugin $plugin a seminars plugin instance
+     * @param \Tx_Oelib_TemplateHelper $plugin a seminars plugin instance
      *
      * @return void
      */
-    public function setPlugin(AbstractPlugin $plugin)
+    public function setPlugin(\Tx_Oelib_TemplateHelper $plugin)
     {
         $this->plugin = $plugin;
     }
@@ -79,6 +78,7 @@ class Tx_Seminars_Service_SingleViewLinkBuilder
                 false,
                 true
             ),
+            'useCacheHash' => true,
         ];
 
         return $this->getContentObject()->typoLink_URL($linkConfiguration);
@@ -189,12 +189,9 @@ class Tx_Seminars_Service_SingleViewLinkBuilder
     protected function getSingleViewPageFromConfiguration()
     {
         if ($this->plugin !== null) {
-            $result = $this->getPlugin()->getConfValueInteger('detailPID');
-        } else {
-            $result = \Tx_Oelib_ConfigurationRegistry
-                ::get('plugin.tx_seminars_pi1')->getAsInteger('detailPID');
+            return $this->getPlugin()->getConfValueInteger('detailPID');
         }
 
-        return $result;
+        return \Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars_pi1')->getAsInteger('detailPID');
     }
 }

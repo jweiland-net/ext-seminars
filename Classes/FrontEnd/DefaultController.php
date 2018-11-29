@@ -637,34 +637,23 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      */
     public function getLoginLink($label, $pageId, $eventId = 0)
     {
-        $linkConfiguration = ['parameter' => $pageId];
-
-        if ($eventId) {
-            $linkConfiguration['additionalParams']
-                = GeneralUtility::implodeArrayForUrl(
+        $linkConfiguration = ['parameter' => $pageId, 'useCacheHash' => true];
+        if ($eventId !== 0) {
+            $linkConfiguration['additionalParams']= GeneralUtility::implodeArrayForUrl(
                 'tx_seminars_pi1',
-                [
-                    'seminar' => $eventId,
-                    'action' => 'register',
-                ],
+                ['seminar' => $eventId, 'action' => 'register'],
                 '',
                 false,
                 true
             );
         }
 
-        $redirectUrl = GeneralUtility::locationHeaderUrl(
-            $this->cObj->typoLink_URL($linkConfiguration)
-        );
+        $redirectUrl = GeneralUtility::locationHeaderUrl($this->cObj->typoLink_URL($linkConfiguration));
 
         // XXX We need to do this workaround of manually encoding brackets in
         // the URL due to a bug in the TYPO3 core:
         // http://bugs.typo3.org/view.php?id=3808
-        $redirectUrl = preg_replace(
-            ['/\\[/', '/\\]/'],
-            ['%5B', '%5D'],
-            $redirectUrl
-        );
+        $redirectUrl = preg_replace(['/\\[/', '/\\]/'], ['%5B', '%5D'], $redirectUrl);
 
         return $this->cObj->typoLink(
             $label,
@@ -672,10 +661,9 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
                 'parameter' => $this->getConfValueInteger('loginPID'),
                 'additionalParams' => GeneralUtility::implodeArrayForUrl(
                     '',
-                    [
-                        rawurlencode('tx_seminars_pi1[uid]') => $eventId,
-                        'redirect_url' => $redirectUrl,
-                    ]
+                    ['tx_seminars_pi1[uid]' => $eventId, 'redirect_url' => $redirectUrl],
+                    false,
+                    true
                 ),
             ]
         );

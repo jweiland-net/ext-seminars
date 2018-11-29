@@ -252,7 +252,7 @@ class Tx_Seminars_OldModel_Speaker extends \Tx_Seminars_OldModel_Abstract
     /**
      * Returns the gender of this speaker.
      *
-     * @return int the gender of the speaker, will be either
+     * @return int the gender of the speaker,   will be either
      *                 GENDER_MALE,
      *                 GENDER_FEMALE or
      *                 GENDER_UNKNOWN if the speaker has no gender
