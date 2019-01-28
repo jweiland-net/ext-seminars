@@ -10,12 +10,12 @@ class Tx_Seminars_Tests_Unit_Bag_OrganizerTest extends \Tx_Phpunit_TestCase
     /**
      * @var \Tx_Seminars_Bag_Organizer
      */
-    private $subject;
+    private $subject = null;
 
     /**
      * @var \Tx_Oelib_TestingFramework
      */
-    private $testingFramework;
+    private $testingFramework = null;
 
     protected function setUp()
     {

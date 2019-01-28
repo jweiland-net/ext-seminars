@@ -16,12 +16,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends \Tx_Phpunit_TestC
     /**
      * @var \Tx_Seminars_FrontEnd_CategoryList
      */
-    private $subject;
+    private $subject = null;
 
     /**
      * @var \Tx_Oelib_TestingFramework
      */
-    private $testingFramework;
+    private $testingFramework = null;
 
     /**
      * @var int the UID of a seminar to which the fixture relates

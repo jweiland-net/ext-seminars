@@ -11,12 +11,12 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends \Tx_Phpunit_Tes
     /**
      * @var \Tx_Seminars_BagBuilder_Registration
      */
-    private $subject;
+    private $subject = null;
 
     /**
      * @var \Tx_Oelib_TestingFramework
      */
-    private $testingFramework;
+    private $testingFramework = null;
 
     protected function setUp()
     {

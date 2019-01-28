@@ -11,12 +11,12 @@ class Tx_Seminars_Tests_Unit_Bag_AbstractTest extends \Tx_Phpunit_TestCase
     /**
      * @var \Tx_Seminars_Tests_Unit_Fixtures_Bag_Testing
      */
-    private $subject;
+    private $subject = null;
 
     /**
      * @var \Tx_Oelib_TestingFramework
      */
-    private $testingFramework;
+    private $testingFramework = null;
 
     /**
      * @var int the UID of the first test record in the DB

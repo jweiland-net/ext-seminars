@@ -10,12 +10,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_PublishEventTest extends \Tx_Phpunit_TestC
     /**
      * @var \Tx_Seminars_FrontEnd_PublishEvent
      */
-    private $subject;
+    private $subject = null;
 
     /**
      * @var \Tx_Oelib_TestingFramework
      */
-    private $testingFramework;
+    private $testingFramework = null;
 
     protected function setUp()
     {

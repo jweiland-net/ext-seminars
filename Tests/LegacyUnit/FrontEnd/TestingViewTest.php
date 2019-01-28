@@ -8,16 +8,14 @@
 class Tx_Seminars_Tests_Unit_FrontEnd_TestingViewTest extends \Tx_Phpunit_TestCase
 {
     /**
-     * the fixture to test
-     *
      * @var \Tx_Seminars_Tests_Unit_Fixtures_FrontEnd_TestingView
      */
-    private $subject;
+    private $subject = null;
 
     /**
      * @var \Tx_Oelib_TestingFramework
      */
-    private $testingFramework;
+    private $testingFramework = null;
 
     protected function setUp()
     {

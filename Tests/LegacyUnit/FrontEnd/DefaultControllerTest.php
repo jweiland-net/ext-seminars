@@ -19,12 +19,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
     /**
      * @var \Tx_Seminars_FrontEnd_DefaultController
      */
-    private $subject;
+    private $subject = null;
 
     /**
      * @var \Tx_Oelib_TestingFramework
      */
-    private $testingFramework;
+    private $testingFramework = null;
 
     /**
      * @var \Tx_Oelib_Translator
@@ -41,7 +41,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
     /**
      * @var int the UID of a seminar to which the fixture relates
      */
-    private $seminarUid;
+    private $seminarUid = 0;
 
     /**
      * @var int PID of a dummy system folder

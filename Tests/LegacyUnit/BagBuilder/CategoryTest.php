@@ -10,12 +10,12 @@ class Tx_Seminars_Tests_Unit_BagBuilder_CategoryTest extends \Tx_Phpunit_TestCas
     /**
      * @var \Tx_Seminars_BagBuilder_Category
      */
-    private $subject;
+    private $subject = null;
 
     /**
      * @var \Tx_Oelib_TestingFramework
      */
-    private $testingFramework;
+    private $testingFramework = null;
 
     protected function setUp()
     {

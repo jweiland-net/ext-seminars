@@ -13,17 +13,17 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
     /**
      * @var \Tx_Seminars_FrontEnd_EventEditor
      */
-    protected $subject = null;
+    private $subject = null;
 
     /**
      * @var \Tx_Oelib_TestingFramework
      */
-    protected $testingFramework = null;
+    private $testingFramework = null;
 
     /**
      * @var \Tx_Oelib_EmailCollector
      */
-    protected $mailer = null;
+    private $mailer = null;
 
     /**
      * @var \Tx_Oelib_Configuration

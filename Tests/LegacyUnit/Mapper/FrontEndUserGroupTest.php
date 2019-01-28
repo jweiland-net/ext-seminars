@@ -11,12 +11,12 @@ class Tx_Seminars_Tests_Unit_Mapper_FrontEndUserGroupTest extends \Tx_Phpunit_Te
     /**
      * @var \Tx_Seminars_Mapper_FrontEndUserGroup the object to test
      */
-    private $subject;
+    private $subject = null;
 
     /**
      * @var \Tx_Oelib_TestingFramework the testing framework
      */
-    private $testingFramework;
+    private $testingFramework = null;
 
     protected function setUp()
     {

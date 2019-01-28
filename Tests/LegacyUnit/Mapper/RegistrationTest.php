@@ -11,12 +11,12 @@ class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends \Tx_Phpunit_TestCas
     /**
      * @var \Tx_Oelib_TestingFramework
      */
-    private $testingFramework;
+    private $testingFramework = null;
 
     /**
      * @var \Tx_Seminars_Mapper_Registration
      */
-    private $subject;
+    private $subject = null;
 
     protected function setUp()
     {

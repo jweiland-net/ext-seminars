@@ -17,12 +17,12 @@ class Tx_Seminars_Tests_Unit_BackEnd_CancelEventMailFormTest extends \Tx_Phpunit
     /**
      * @var CancelEventMailForm
      */
-    private $subject;
+    private $subject = null;
 
     /**
      * @var \Tx_Oelib_TestingFramework
      */
-    private $testingFramework;
+    private $testingFramework = null;
 
     /**
      * UID of a dummy system folder
@@ -48,7 +48,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_CancelEventMailFormTest extends \Tx_Phpunit
     /**
      * @var \Tx_Oelib_EmailCollector
      */
-    protected $mailer = null;
+    private $mailer = null;
 
     protected function setUp()
     {

@@ -10,12 +10,12 @@ class Tx_Seminars_Tests_Unit_BagBuilder_SpeakerTest extends \Tx_Phpunit_TestCase
     /**
      * @var \Tx_Seminars_BagBuilder_Speaker
      */
-    private $subject;
+    private $subject = null;
 
     /**
      * @var \Tx_Oelib_TestingFramework
      */
-    private $testingFramework;
+    private $testingFramework = null;
 
     protected function setUp()
     {
