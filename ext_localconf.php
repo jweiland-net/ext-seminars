@@ -178,3 +178,10 @@ $iconRegistry->registerIcon(
     <INCLUDE_TYPOSCRIPT: source="FILE:EXT:seminars/Configuration/TSconfig/ContentElementWizard.txt">
 '
 );
+
+// register the time slot wizard
+$GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['nodeRegistry'][1558632705] = [
+    'nodeName' => 'time_slot_wizard',
+    'priority' => 70,
+    'class' => \OliverKlee\Seminars\BackEnd\TimeSlotWizard::class,
+];
